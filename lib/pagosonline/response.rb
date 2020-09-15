@@ -12,18 +12,16 @@ module Pagosonline
 
     def test?
       (
-        params["test"] ||
-          params["prueba"]
+        params["test"] || params["prueba"]
       ) == "1"
     end
 
     def currency
-      params["currency"] ||
-        params["moneda"]
+      params["currency"] || params["moneda"]
     end
 
     def signature
-      params["firma"]
+      params["firma"] || params["sign"] || params[:sign]
     end
 
     def state_code
