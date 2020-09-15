@@ -13,7 +13,7 @@ module Pagosonline
     def test?
       (
         params["test"] || params["prueba"]
-      ) == "1"
+        ) == "1"
     end
 
     def currency
@@ -21,7 +21,7 @@ module Pagosonline
     end
 
     def signature
-      params["firma"] || params["sign"] || params[:sign]
+      params["firma"] || params["sign"]
     end
 
     def state_code
@@ -54,21 +54,19 @@ module Pagosonline
 
     def amount
       (
-        self.params["value"] ||
-          self.params["valor"]
+        self.params["value"] || self.params["valor"]
       ).to_f
     end
 
     def reference
-      self.params["reference_sale"] ||
-        self.params["ref_venta"]
+      self.params["reference_sale"] || self.params["ref_venta"]
     end
 
     def transaccion_id
       self.params["transaction_id"] ||
-        self.params["transaccion_id"]
+      self.params["transaccion_id"]
     end
-        
+
     def calcule_sign
       Digest::MD5.hexdigest([
         self.client.key,
