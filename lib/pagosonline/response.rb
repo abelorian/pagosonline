@@ -68,6 +68,17 @@ module Pagosonline
       self.params["transaction_id"] ||
         self.params["transaccion_id"]
     end
+        
+    def calcule_sign
+      Digest::MD5.hexdigest([
+        self.client.key,
+        self.client.merchant_id,
+        self.reference,
+        self.amount_for_signature,
+        self.currency,
+        self.state_code
+      ].join(SIGNATURE_JOIN))
+    end
 
     def valid?
       self.signature == Digest::MD5.hexdigest([
