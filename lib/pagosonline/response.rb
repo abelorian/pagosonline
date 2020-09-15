@@ -21,7 +21,7 @@ module Pagosonline
     end
 
     def signature
-      params["firma"] || params["sign"] || params[:sign]
+      params["firma"].presence || params["sign"].presence || params[:sign]
     end
 
     def state_code
